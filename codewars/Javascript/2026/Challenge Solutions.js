@@ -1,0 +1,501 @@
+----------------------------------------------------------------------
+DATE: MM/DD/YY
+
+CHALLENGE NAME:
+
+DESCRIPTION:
+
+PARAMETERS AND RETURN:
+- Parameters: [Input name and type]
+- Return: [Expected output and type]
+
+EXAMPLES:
+- [Input] → [Expected output]
+- [Input] → [Expected output]
+- [Input] → [Expected output]
+
+SOLUTION:
+
+----------------------------------------------------------------------
+DATE: 11/4/26
+
+CHALLENGE NAME: Descending Order
+
+DESCRIPTION: Your task is to make a function that can take any non-negative integer as an argument and return it with its digits in descending order. 
+Essentially, rearrange the digits to create the highest possible number.
+
+PARAMETERS AND RETURN:
+- Parameters: Integer (n)
+- Return: Integer
+
+EXAMPLES:
+- decendingOrder(42145), 54421
+- decendingOrder(145263), 654321
+- decendingOrder(123456789), 987654321
+
+SOLUTION:
+
+  function descendingOrder(n){
+    const decendingDigits = n.toString().split('').sort((a,z) => z - a).join('')
+    return decendingdigits
+  }
+
+
+----------------------------------------------------------------------
+DATE: 11/3/26
+
+CHALLENGE NAME: Get the Middle Character
+
+DESCRIPTION: You are going to be given a non-empty string. Your job is to return the middle character(s) of the string.
+If the string's length is odd, return the middle character.
+If the string's length is even, return the middle 2 characters.
+
+PARAMETERS AND RETURN:
+- Parameters: String s
+- Return: String 
+
+EXAMPLES:
+- getMiddle('a'), 'a'
+- getMiddle('abc'),'b'
+- getMiddle('testing'),'t'
+- getMiddle('middle'),'dd'
+
+INITIAL SOLUTION:
+
+function getMiddle(s) {
+  const midpoint = Math.floor(s.length / 2)
+
+  if (s.length % 2 === 0) {
+    return s.slice(midpoint - 1, midpoint + 1)
+  }
+
+  return s[midpoint]
+}
+
+REFACTOR / ALTERNATIVE:
+
+
+NOTES:
+- [Key concept]
+- [Alternative approach or edge case to remember]
+
+----------------------------------------------------------------------
+DATE: 11/2/26
+
+CHALLENGE NAME: Array.diff
+
+DESCRIPTION: Implement a function that computes the difference between two lists. 
+The function should remove all occurrences of elements from the first list (a) that are present in the second list (b). 
+The order of elements in the first list should be preserved in the result.
+
+PARAMETERS AND RETURN:
+- Parameters: 2 Arrays of Integers (a,b) 
+- Return: Array of Integers
+
+EXAMPLES:
+- arrayDiff([1, 2],[1]), [2]
+- arrayDiff([[1, 2, 2, 2, 3],[2]), [1,3]
+
+INITIAL SOLUTION:
+
+
+function arrayDiff(a,b){
+  // make a  set from b so we get unique values
+  const valuesToRemove = new Set(b)
+  // filter A, based on criteria that it is not in b
+  const differenceInArrs = a.filter(n => !valuesToRemove.has(n)) 
+  return differenceInArrs
+}
+
+
+REFACTOR / ALTERNATIVE:
+function arrayDiff(a, b){
+  const valuesToRemove = new Set(b)
+  return a.filter(num => !valuesToRemove.has(num)) 
+}
+
+NOTES:
+- 
+
+----------------------------------------------------------------------
+DATE: 10/30/26
+
+CHALLENGE NAME: Find the odd int
+
+DESCRIPTION: Given an array of integers, find the one that appears an odd number of times.
+
+There will always be only one integer that appears an odd number of times.
+
+PARAMETERS AND RETURN:
+- Parameters: Array of Integers
+- Return: Number 
+
+EXAMPLES:
+- findOdd([7]),7
+- findOdd([0]),0
+- findOdd([1,1,2]),2
+- findOdd([0,1,0,1,0]),0
+- findOdd([1,2,2,3,3,3,4,3,3,3,2,2,1]),4
+
+INITIAL SOLUTION:
+function findOdd(intArr){
+  const integerCount = {}
+  // go through arr, increment count, and/or add new items to obj
+  for (let i = 0; i < intArr.length; i++){
+    const currNum = intArr[i]
+    // If currNum has been seen already, increment. Otherwise add to obj and establish count.
+    if (integerCount[currNum]) {
+      integerCount[currNum]++
+    } else {
+      integerCount[currNum] = 1
+    }
+  }
+  // iterate over obj and find odd 
+  for (let int in integerCount){
+    if(integerCount[int] % 2 !== 0){
+      return Number(int)
+    }
+  }
+}
+
+REFACTOR / ALTERNATIVE:
+function findOdd(intArr) {
+  const integerCount = {}
+
+  for (const currNum of intArr) {
+    integerCount[currNum] = (integerCount[currNum] || 0) + 1
+  }
+
+  for (const [num, count] of Object.entries(integerCount)) {
+    if (count % 2 !== 0) {
+      return Number(num)
+    }
+  }
+}
+
+NOTES:
+- [Key concept]
+- [Alternative approach or edge case to remember]
+
+----------------------------------------------------------------------
+DATE: 10/29/26
+
+CHALLENGE NAME: Highest and Lowest
+
+DESCRIPTION: In this assignment you are given a string of space separated numbers, 
+and have to return the highest and lowest number. All numbers are valid Int32, no need to validate them.
+There will always be at least one number in the input string.
+Output string must be two numbers separated by a single space, and highest number is first.
+
+PARAMETERS AND RETURN:
+- Parameters: String (numbers)
+- Return: String ("High Number Low Number")
+
+EXAMPLES:
+- highAndLow("1 2 3 4 5"), "5 1" 
+- highAndLow("1 2 -3 4 5"), "5 -3" 
+- highAndLow("1 9 3 4 -5"), "9 -5" 
+
+SOLUTION:
+function highAndLow(numbers){
+  // Ensure each number is correct data type for evaluation
+  const numsArr = numbers.split(' ').map((x) => Number(x))
+  
+  let highest = numsArr[0] 
+  let lowest = numsArr[0] 
+  
+  for(let i = 0; i < numsArr.length; i++) {
+      const currNum = numsArr[i] 
+      if (currNum < lowest) {
+        lowest = currNum 
+      }
+      else if (currNum > highest){
+        highest = currNum
+      }
+  }
+  return `${highest} ${lowest}`
+
+}
+
+
+REFACTOR / Alternative:
+- Could use Math.min  / Math.max to shorten code, but would require looping array twice
+
+NOTES:
+- Convert to numbers before comparing. Split gives array of strings, and Strings compare character by character, so "10" < "9" is true.
+
+----------------------------------------------------------------------
+DATE: 10/28/26
+
+CHALLENGE NAME:Sum of positive
+
+DESCRIPTION: You get an array of numbers, return the sum of all of the positives ones.
+
+
+PARAMETERS AND RETURN:
+- Parameters:  Array (arr)
+- Return: Integer (currTotal)
+
+EXAMPLES:
+- positiveSum([1, 2, 3, 4, 5]), 15  // All positive
+- positiveSum([1, -2, 3, -4, 5]), 9 // Mixed positive and negative
+- positiveSum([]), 0 // Empty array
+- positiveSum([-1, -2, -3]), 0 // No positive numbers
+- positiveSum([0, 0, 0]), 0 // Zeros only
+- positiveSum([5]), 5 //Single positive number
+
+SOLUTION:
+
+function positiveSum(arr) {
+  let currTotal = 0
+
+  for (let i = 0; i < arr.length; i++){
+    const currNum = arr[i]
+
+    if (currNum > 0) {
+      currTotal += currNum
+    }
+  }
+  return currTotal
+}
+
+
+REFACTOR:
+ - Can use Filter & Reduce
+----------------------------------------------------------------------
+DATE: 10/27/26 
+
+CHALLENGE NAME: Who likes it?
+
+DESCRIPTION: 
+You probably know the "like" system from Facebook and other pages. People can "like" blog posts, pictures or other items. 
+We want to create the text that should be displayed next to such an item.
+Implement the function which takes an array containing the names of people that like an item. 
+It must return the display text as shown in the below examples:
+
+
+PARAMETERS AND RETURN:
+- Parameters: Array (names)
+- Return: String (likesStatement)
+
+EXAMPLES:
+- likes([]), "no one likes this"
+- likes(["Peter"]), "Peter likes this"
+- likes(["Jacob", "Alex"]), "Jacob and Alex like this"
+- likes(["Max", "John", "Mark"]), "Max, John and Mark like this"
+- likes(["Alex", "Jacob", "Mark", "Max"]), "Alex, Jacob and 2 others like this"
+
+ORIGINAL SOLUTION:
+
+// this function takes an array (names) returns a 'likesStatement' representing who if anyonelikes this post.
+function likes(names){
+  // Find length of array 
+  const arrLength = names.length
+
+  // Establish likesStatement 
+  let likesStatement = ""
+
+  // Length determines which template will be used
+  if (arrLength === 0){
+    likesStatement = "no one likes this"
+  } 
+  else if(arrLength === 1){
+    likesStatement = `${names[0]} likes this`
+  }
+  else if (arrLength === 2){
+    likesStatement = `${names[0]} and ${names[1]} like this`
+  }
+  else if (arrLength === 3){
+    likesStatement = `${names[0]}, ${names[1]} and ${names[2]} like this`
+  }
+  else {
+    likesStatement = `${names[0]}, ${names[1]} and ${arrLength - 2} others like this`
+  }
+
+  return likesStatement
+}
+
+REFACTOR:
+ if (arrLength === 0) {
+    return "no one likes this"
+  } else if (arrLength === 1) {
+    return `${names[0]} likes this`
+  } else if (arrLength === 2) {
+    return `${names[0]} and ${names[1]} like this`
+  } else if (arrLength === 3) {
+    return `${names[0]}, ${names[1]} and ${names[2]} like this`
+  } else {
+    return `${names[0]}, ${names[1]} and ${arrLength - 2} others like this`
+  }
+}
+
+----------------------------------------------------------------------
+DATE: 10/26/26
+
+CHALLENGE NAME:
+Vowel Count
+
+DESCRIPTION:
+- Return the number (count) of vowels in the given string.
+- We will consider a, e, i, o, u as vowels for this challenge (but not y).
+- The input string will only consist of lower case letters and/or spaces.
+
+PARAMETERS AND RETURN:
+- Parameters: string (str)
+- Return: number (count)
+
+EXAMPLES:
+- getCount('a'), 1
+- getCount('b'), 0
+- getCount(' '), 0
+- getCount('y'), 0
+- getCount('a e i o u'), 5
+
+SOLUTION:
+
+function getCount(str){
+// create variable to hold current count of vowels.
+  let count = 0
+// establish valid vowels.
+  const vowels = new Set (['a','e','i','o','u'])
+
+// iterate over input string
+  for(let i = 0; i < str.length; i++){
+    const currChar = str[i]
+    // check if character is a vowel
+    if(vowels.has(currChar)){
+      count++
+    }
+   
+  }
+  return count
+}
+
+
+NOTES:
+Alternative approach: 
+- I could have used an Object instead of a Set, 
+- I'd check for vowel with if(Object.hasOwn(vowels, curChar)) {count ++}
+
+Edge cases: 
+The challenge specifies lowercase input, so uppercase handling isn't required but could be.
+
+----------------------------------------------------------------------
+DATE: 10/23/26
+
+CHALLENGE NAME: Even or Odd
+
+DESCRIPTION:
+Create a function that takes an integer as an argument and returns "Even" for even numbers or "Odd" for odd numbers.
+
+PARAMETERS AND RETURN:
+- Parameters: num -> Integer
+- Return: "Even or Odd" -> String
+
+EXAMPLES:
+- [8] → "Even"
+- [1] → "Odd"
+- [0] → "Even"
+- [-1] → "Odd"
+- [-2] → "Even"
+
+
+SOLUTION:
+function returnsParity (num){
+  const isEven = num % 2 === 0 
+  return isEven ? "Even" : "Odd"
+}
+
+// Tests
+    console.log(returnsParity(8),  "Even" , 8)
+    console.log(returnsParity(1),  "Odd",   1)
+    console.log(returnsParity(0),  "Even",  0)
+    console.log(returnsParity(-1), "Odd",  -1)
+    console.log(returnsParity(-2), "Even", -2)
+
+NOTES:
+-  Negative integers work without Math.abs() because negative even numbers still have a remainder of 0 when divided by 2. 
+-  Zero is also even. The function can be simplified to return num % 2 === 0 ? "Even" : "Odd" without an intermediate variable.
+
+
+
+6/4/2026
+Vowel Count:
+Return the number (count) of vowels in the given string.
+
+We will consider a, e, i, o, u as vowels (but not y).
+
+The input string will only consist of lower case letters and/or spaces.
+
+// Parameters and Return: str -> # of vowels in input.
+// Examples: 'abc' -> 1, 'aeiouy' -> 5, 'b' -> 0, '  ' -> 0, 
+
+function getCount(str) {
+  // create variable to hold count of vowels
+  let vowelCount = 0
+  // iterate over each letter in str, increment count if current letter is vowel.
+  for (let char of str){
+    if (char === 'a' || char === 'e' || char === 'i' || char === 'o' || char === 'u'){
+      vowelCount++
+    }
+  }
+  return vowelCount
+}
+
+
+
+
+
+6/2/2026
+Multiples of 3 or 5:
+If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.
+
+Finish the solution so that it returns the sum of all the multiples of 3 or 5 below the number passed in.
+
+Additionally, if the number is negative, return 0.
+
+Note: If a number is a multiple of both 3 and 5, only count it once.
+
+// numeric value (number) -> sum of all multiples of 3 or 5 below at number.
+function solution(number){
+   // if negative numeric value -> 0
+  if (number < 0) {
+    return 0
+  }
+  // Create variable to hold sum
+  let sum = 0
+  
+   // Check if each number is divisible by 3 or 5, if so add to sum.
+  for (let i = 0; i < number; i++) {
+    if(i % 3 === 0 || i % 5 === 0) {
+      sum += i
+    }
+  }
+  return sum
+}
+
+
+
+6/1/2026
+Even or Odd:
+Create a function that takes an integer as an argument and returns "Even" for even numbers or "Odd" for odd numbers.
+
+  // number -> "Even" or "Odd"
+  // 1 -> "Odd",  2 -> "Even", 0 - > "" , -1 -> "Odd", -2 -> "Even"
+
+function evenOrOdd(number) {  
+  let result = 'Even'
+  // Check remainder if dividing by 2, 
+  const remainder = number % 2
+  if (remainder !== 0) {
+    result = 'Odd'
+  }
+  
+  return result
+}
+
+Refactored:
+
+function evenOrOdd(number) {  
+  return number % 2 === 0 ? "Even" : "Odd"
+}
