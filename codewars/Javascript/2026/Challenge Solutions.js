@@ -35,10 +35,14 @@ EXAMPLES:
 
 SOLUTION:
 
-  function descendingOrder(n){
-    const decendingDigits = n.toString().split('').sort((a,z) => z - a).join('')
-    return decendingdigits
-  }
+  function descendingOrder(n) {
+  const descendingDigits = String(n)
+    .split('')
+    .sort((a, b) => b - a)
+    .join('')
+
+  return Number(descendingDigits)
+}
 
 
 ----------------------------------------------------------------------
