@@ -14,7 +14,44 @@ EXAMPLES:
 - [Input] → [Expected output]
 - [Input] → [Expected output]
 
+QUESTIONS:
+
 SOLUTION:
+
+----------------------------------------------------------------------
+DATE: 11/10/26
+
+CHALLENGE NAME: Shortest Word
+
+DESCRIPTION: Simple, given a string of words, return the length of the shortest word(s).
+
+String will never be empty and you do not need to account for different data types.
+
+PARAMETERS AND RETURN:
+- Parameters:  s (string of words)
+- Return: number (length of shortest word)
+
+EXAMPLES:
+- findShort("apple banana watermelon"), 5
+
+QUESTIONS: How is a word defined? How are the words seperated?
+
+SOLUTION:
+
+function findShort(s){
+  const words = s.split(' ')
+  
+  let shortestWordSeen = words[0].length
+
+  for (let i = 1; i < words.length; i++){
+    const currWordLength = words[i].length
+    if (currWordLength <  shortestWordSeen){
+      shortestWordSeen = currWordLength
+    }
+  } 
+  return shortestWordSeen
+
+}
 
 ----------------------------------------------------------------------
 DATE: 11/4/26
