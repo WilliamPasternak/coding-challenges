@@ -18,6 +18,71 @@ QUESTIONS:
 
 SOLUTION:
 
+ALTERNATIVE/S:
+
+----------------------------------------------------------------------
+DATE: 11/11/26
+
+CHALLENGE NAME: Isograms
+
+DESCRIPTION: An isogram is a word that has no repeating letters, consecutive or non-consecutive. 
+Implement a function that determines whether a string that contains only letters is an isogram. Assume the empty string is an isogram. Ignore letter case.
+
+PARAMETERS AND RETURN:
+- Parameters: String (str)
+- Return: Boolean representing isogram status
+
+EXAMPLES:
+- isIsogram("aba"), false // "A" repeats 
+- isIsogram("moOse"), false // "O" repeated, ignore letter case
+- isIsogram("Dermatoglyphics"), true  // all letters are unique
+
+
+QUESTIONS:
+Am I to assume this string is a single word with no spaces or other seperators?
+Any notes on length of string input?
+
+SOLUTION:
+
+function isIsogram(str){
+  const letters = str.toLowerCase()
+  const seenChars = {}
+  for (const char of letters){
+      if(char in seenChars){
+        return false
+      } else { 
+        seenChars[char] = true
+      }
+  }
+  return true
+}
+
+ALTERNATIVE/S:
+// Create a set, check if the size of the set (unique characters) equals the input string length
+function isIsogram(str) {
+  const letters = str.toLowerCase()
+  return new Set(letters).size === letters.length
+}
+
+
+
+// Use a set to track unique letters seen, add characters as you go, verify if seen, early exit
+function isIsogram(str){
+  const seenLetters = new Set()
+  
+  for (const char of str.toLowerCase()){
+    if(seenLetters.has(char)){
+      return false
+    } else {
+      seenLetters.add(char)
+    }
+  }
+  return true
+}
+
+
+
+
 ----------------------------------------------------------------------
 DATE: 11/10/26
 
