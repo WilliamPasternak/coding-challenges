@@ -21,6 +21,45 @@ SOLUTION:
 ALTERNATIVE/S:
 
 ----------------------------------------------------------------------
+DATE: 11/13/26
+
+CHALLENGE NAME: Exes and Ohs
+
+DESCRIPTION: Check to see if a string has the same amount of 'x's and 'o's. 
+The method must return a boolean and be case insensitive. The string can contain any char.
+
+PARAMETERS AND RETURN:
+- Parameters: String (str)
+- Return: Boolean
+
+EXAMPLES:
+- XO("ooxx") => true // 2x O , 2x X
+- XO("xooxx") => false // 2x O,3x X
+- XO("ooxXm") => true // 2x O, 2x X
+- XO("zpzpzpp") => true // 0x O, 0x X
+- XO("zzoo") => false // Ox2 , 0xX
+
+QUESTIONS:
+
+
+SOLUTION:
+function XO(str) {
+    const characters = str.toLowerCase()
+    let countO = 0
+    let countX = 0
+    for (const char of characters){
+      if (char === 'x'){
+        countX++
+      } else if (char === 'o'){
+        countO++
+      }
+    }
+    return countO === countX
+}
+
+ALTERNATIVE/S:
+
+----------------------------------------------------------------------
 DATE: 11/11/26
 
 CHALLENGE NAME: Isograms
