@@ -5,6 +5,10 @@ CHALLENGE NAME:
 
 DESCRIPTION:
 
+NOTES:
+
+QUESTIONS:
+
 PARAMETERS AND RETURN:
 - Parameters: [Input name and type]
 - Return: [Expected output and type]
@@ -14,11 +18,84 @@ EXAMPLES:
 - [Input] → [Expected output]
 - [Input] → [Expected output]
 
-QUESTIONS:
 
 SOLUTION:
 
 ALTERNATIVE/S:
+
+----------------------------------------------------------------------
+DATE: 11/17/26
+
+CHALLENGE NAME: Duplicate Encoder
+
+DESCRIPTION: The goal of this exercise is to convert a string to a new string where 
+each character in the new string is "(" if that character appears only once in the original string, 
+or ")" if that character appears more than once in the original string. 
+Ignore capitalization when determining if a character is a duplicate.
+
+NOTES:
+- All chars in my return string will be ( or )
+- Returned string will be same length as input string
+
+QUESTIONS:
+- Handle empty input string?
+- Exit early if string length is 0 or 1?
+
+PARAMETERS AND RETURN:
+- Parameters: String (str)
+- Return: String - modified version of (str) where chars are encoded based on above rules in description
+
+EXAMPLES:
+duplicateEncode("A"),"(" // Occurs once
+duplicateEncode("Aa"),"))" // Occurs more than once, case insensitive
+duplicateEncode("Aabb"),"))))" // Occurs more than once, case insensitive
+duplicateEncode("recede"), "()()()" // "E" repeates, "r,c,d" appear once
+duplicateEncode(" "),"(" // Space is treated as a character
+duplicateEncode(""), "" // Unclear on what challenge expects in this situation
+
+
+SOLUTION:
+
+function duplicateEncode(str){
+  const chars = str.toLowerCase()
+  const encodedChars = []
+
+  // Sets holding seen characters and duplicates
+  const seenChars = new Set() 
+  const duplicates = new Set() 
+  
+  // Determine if we've seen character before
+  for (const char of chars){
+    if (seenChars.has(char)){
+      duplicates.add(char)
+    } 
+    seenChars.add(char)   
+  }
+
+  // Explicitly encode characters
+  for (const char of chars){
+    encodedChars.push(duplicates.has(char) ? ")" : "(") 
+  }
+  // Alternative - Combine encoding and return: 
+      // return [...chars].map(char => duplicates.has(char) ? ")" : "(").join('')
+
+  return encodedChars.join("")
+}
+
+ALTERNATIVE/S:
+function duplicateEncode(str){
+  const chars = str.toLowerCase()
+  const charCounts = {}
+  
+  // Count occurances of each char
+  for(const char of chars){
+    charCounts[char] = (charCounts[char] ?? 0) + 1
+  }
+
+// to Encode characters
+    return [...chars].map(char => charCounts[char] > 1 ? ")" : "(").join('')
+}
+
 
 ----------------------------------------------------------------------
 DATE: 11/16/26
