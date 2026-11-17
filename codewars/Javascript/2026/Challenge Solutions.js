@@ -21,6 +21,62 @@ SOLUTION:
 ALTERNATIVE/S:
 
 ----------------------------------------------------------------------
+DATE: 11/16/26
+
+CHALLENGE NAME: Counting Duplicates
+
+
+DESCRIPTION: Write a function that will return the count of distinct case-insensitive alphabetic characters 
+and numeric digits that occur more than once in the input string. 
+The input string can be assumed to contain only alphabets (both uppercase and lowercase) and numeric digits.
+
+
+PARAMETERS AND RETURN:
+- Parameters: String (text)
+- Return: Number - Count of distinct case-insensitive alpha-chars and numeric digits that occur more than once in input string
+
+EXAMPLES:
+- duplicateCount('abc'), 0 // no characters repeat more than once
+- duplicateCount('aa'), 1 // A Count > 1
+- duplicateCount('aaAAaA'), 1 // A Count > 1
+- duplicateCount('aabbcc'), 3 // All char Count > 1
+- duplicateCount('11'), 1 // # Count > 1
+- duplicateCount('aA'), 1 // Case-insensitive A count > 1
+
+
+QUESTIONS:
+- 
+
+SOLUTION:
+
+function duplicateCount(text) {
+  const seen = new Set()
+  const duplicates = new Set()
+
+  for (const char of text.toLowerCase()) {
+    if (seen.has(char)) {
+      duplicates.add(char)
+    }
+    seen.add(char)
+  }
+  return duplicates.size
+}
+
+ALTERNATIVE/S:
+function duplicateCount(text) {
+  const charCounts = {}
+
+  for (const char of text.toLowerCase()) {
+    charCounts[char] = (charCounts[char] ?? 0) + 1
+  }
+
+  return Object.values(charCounts).filter(count => count > 1).length
+}
+
+
+
+
+----------------------------------------------------------------------
 DATE: 11/13/26
 
 CHALLENGE NAME: Exes and Ohs
