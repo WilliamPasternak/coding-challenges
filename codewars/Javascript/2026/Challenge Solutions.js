@@ -24,6 +24,52 @@ SOLUTION:
 ALTERNATIVE/S:
 
 ----------------------------------------------------------------------
+DATE: 11/18/26
+
+CHALLENGE NAME: Replace With Alphabet Position
+
+DESCRIPTION: In this kata you are required to, given a string, replace every letter with its position in the alphabet.
+
+If anything in the text isn't a letter, ignore it and don't return it. Ex: "a" = 1, "b" = 2, etc.
+
+NOTES:
+- I wanted to find a solution without using an object lookup and hard coding alphabet position values.
+
+
+QUESTIONS:
+
+PARAMETERS AND RETURN:
+- Parameters: String (text)
+- Return: String - Characters are replaced with position in alphabet
+
+EXAMPLES:
+- alphabetPosition("abc"),"1 2 3"
+
+
+SOLUTION:
+
+function alphabetPosition(text) {
+  const positions = []
+  for (const char of text.toUpperCase()){
+      const currCharCode = char.charCodeAt(0)
+      const currCharIsLetter = currCharCode >= 65 && currCharCode <= 90
+      if(currCharIsLetter){
+        positions.push( (currCharCode - 65) + 1 )
+      }
+  }
+  return positions.join(' ')
+}
+
+ALTERNATIVE/S:
+function alphabetPosition(text) {
+  const CHAR_CODE_A = 'A'.charCodeAt(0)
+  return [...text.toUpperCase()].filter(char => char >= 'A' && char <= 'Z')
+                                .map(char => char.charCodeAt(0) - CHAR_CODE_A + 1)
+                                .join(" ")
+}
+
+
+----------------------------------------------------------------------
 DATE: 11/17/26
 
 CHALLENGE NAME: Duplicate Encoder
