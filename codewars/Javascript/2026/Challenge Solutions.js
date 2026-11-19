@@ -24,6 +24,75 @@ SOLUTION:
 ALTERNATIVE/S:
 
 ----------------------------------------------------------------------
+DATE: 11/19/26
+
+CHALLENGE NAME: Take a Ten Minutes Walk
+
+DESCRIPTION: You live in the city of Cartesia where all roads are laid out in a perfect grid. 
+You arrived ten minutes too early to an appointment, so you decided to take the opportunity to go for a short walk. 
+The city provides its citizens with a Walk Generating App on their phones -- everytime you press the button it sends you 
+an array of one-letter strings representing directions to walk (eg. ['n', 's', 'w', 'e']). 
+You always walk only a single block for each letter (direction) and you know it takes you one minute to traverse one city block, 
+so create a function that will return true if the walk the app gives you will take you exactly ten minutes 
+(you don't want to be early or late!) and will, of course, return you to your starting point. Return false otherwise.
+
+NOTES:
+- I would think to get back to where you started, North and South would need to even out, as would East and west.
+- if the guide gives 10N, thats actually a 20 min walk bc you need to go back
+- Start is 0,0. 
+- Every N increases Y by 1, and every S decreases Y by 1
+- Every E increases X by 1, and every W decreaess X by 1
+- so for this to be true, total length of walk input would need to be exactly 10.
+
+QUESTIONS:
+- Is casing of input going to be consistent?
+- Will I get any unexpected characters?
+
+PARAMETERS AND RETURN:
+- Parameters: Array (walk) Single char strings indicating direction
+- Return: Boolean indicating wheter or not walk takes exactly 10 mins.
+
+EXAMPLES:
+// Make it back to appointment on time
+- isValidWalk(['n','n','n','n','n','s','s','s','s','s']),true  // Length of 10, arrive back at appointment on time
+// Make it back to appointment at wrong time
+- isValidWalk(['n','s']),false // Length of 2, Return to appointment too Early
+- isValidWalk(['n','n','n','n','n','n','s','s','s','s','s','s']),false // Length > 10, return to appointment too late
+// Don't make it back to appointment at all.
+- isValidWalk(['n','n','n','n','n','n','n','n','n','n']),false // Length of 10, woudn't ever get back to appointment.
+- isValidWalk(['n','n','n','n','n','n','n','n','n','n','n']),false // Length of >10, woudn't ever get back to appointment.
+
+SOLUTION:
+const WALK_MINUTES = 10
+
+function isValidWalk(walk) {
+  // check if walk is valid length of 10
+  if (walk.length != WALK_MINUTES)  {
+    return false
+  }
+  // check if we can make it back to appointment in time
+  let xOffset = 0
+  let yOffset = 0
+
+  for (const direction of walk){
+    if (direction === 'n'){
+      yOffset++
+    } else if (direction === 's'){
+      yOffset--
+    }
+    if (direction === 'e'){
+      xOffset++
+    } else if (direction === 'w'){
+      xOffset--
+    }
+  }
+  return xOffset === 0 && yOffset === 0
+}
+
+
+ALTERNATIVE/S:
+
+----------------------------------------------------------------------
 DATE: 11/18/26
 
 CHALLENGE NAME: Replace With Alphabet Position
