@@ -24,6 +24,51 @@ SOLUTION:
 ALTERNATIVE/S:
 
 ----------------------------------------------------------------------
+DATE: 11/20/26
+
+CHALLENGE NAME: Persistent Bugger
+
+DESCRIPTION: Write a function, persistence, that takes in a positive parameter num and returns its multiplicative persistence, 
+which is the number of times you must multiply the digits in num until you reach a single digit.
+
+NOTES:
+
+
+QUESTIONS:
+- Type of number given ? (ex. int) or do I need to check input?
+
+
+PARAMETERS AND RETURN:
+- Parameters: Number (positive)
+- Return: Number - multiplicative persistence (# of times you must mulitply the digits in num until you reach a single digit)
+
+EXAMPLES:
+- persistence(39), 3 // (3*9 = 27, 2*7 = 14, 1*4 = 4 and 4 has only one digit, there are 3 multiplications)
+- persistence(999), 4 // (9*9*9 = 729, 7*2*9 = 126, 1*2*6 = 12, 1*2 = 2, there are 4 multiplications)
+- persistence(4), 0 // (4 is a single digit number, there is no multiplication)
+
+
+SOLUTION:
+
+function multiplyDigits(num) {
+  return [...String(num)].reduce((product, digit) => product * Number(digit), 1)
+}
+
+function persistence(num) {
+  let currentNum = num
+  let numOfMultiplications = 0
+
+  while (currentNum >= 10) {
+    currentNum = multiplyDigits(currentNum)
+    numOfMultiplications++
+  }
+
+  return numOfMultiplications
+}
+
+ALTERNATIVE/S:
+
+----------------------------------------------------------------------
 DATE: 11/19/26
 
 CHALLENGE NAME: Take a Ten Minutes Walk
