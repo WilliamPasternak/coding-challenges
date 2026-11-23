@@ -24,6 +24,54 @@ SOLUTION:
 ALTERNATIVE/S:
 
 ----------------------------------------------------------------------
+DATE: 11/23/26
+
+CHALLENGE NAME: Detect Pangram
+
+DESCRIPTION: A pangram is a sentence that contains every single letter of the alphabet at least once. 
+For example, the sentence "The quick brown fox jumps over the lazy dog" is a pangram, 
+because it uses the letters A-Z at least once (case is irrelevant). 
+Given a string, detect whether or not it is a pangram. 
+Return True if it is, False if not. 
+Ignore numbers and punctuation.
+
+NOTES:
+- make sure string is single case
+- iterate over string, add to set 
+- handle spaces and other characters
+- check set size
+
+QUESTIONS:
+Return data type - String or Boolean?
+
+PARAMETERS AND RETURN:
+- Parameters: String (sentence)
+- Return: Boolean 
+
+EXAMPLES:
+- isPangram("The quick brown fox jumps over the lazy dog"), true // (A-Z used. Case sensitive)
+- isPangram("THE quick brown fox jumps over the lazy dog"), true // (A-Z used. Case insensitive)
+- isPangram(""), false // Empty String, no chars used
+- isPangram("abc") false // Not all letters used
+
+
+SOLUTION:
+function isPangram(sentence){
+  const seenLetters = new Set()
+  for (const char of sentence.toLowerCase()){
+    if (char >= 'a' && char <= 'z'){
+      seenLetters.add(char)
+    }
+    
+  }
+  return seenLetters.size === 26
+}
+
+
+ALTERNATIVE/S:
+
+
+----------------------------------------------------------------------
 DATE: 11/20/26
 
 CHALLENGE NAME: Persistent Bugger
