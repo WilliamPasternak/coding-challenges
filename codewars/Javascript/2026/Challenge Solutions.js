@@ -24,6 +24,49 @@ SOLUTION:
 ALTERNATIVE/S:
 
 ----------------------------------------------------------------------
+DATE: 11/25/26
+
+CHALLENGE NAME: Unique In Order
+
+DESCRIPTION: Implement the function unique_in_order which takes as argument a sequence and returns a list of 
+items without any elements with the same value next to each other and preserving the original order of elements.
+
+NOTES:
+- I  think i'd just put 2 pointers and iterate both.
+- if next pointer does not equal left, push left to array and jump both ahead.
+- need to make sure first char makes it to list.
+- actually this isn't needed, I can just compare to the last characater in unique array
+
+QUESTIONS:
+
+
+PARAMETERS AND RETURN:
+- Parameters: Iterable (iterable)
+- Return: Array of items without any elements with the same value next to each other 
+
+EXAMPLES:         
+- uniqueInOrder('AAAABBBCCDAABBB'), ['A', 'B', 'C', 'D', 'A', 'B']
+- uniqueInOrder('A'), ['A']
+- uniqueInOrder('ABBCcAD'), ['A', 'B', 'C', 'c', 'A', 'D']
+- uniqueInOrder([1,2,2,3,3]), [1,2,3]
+
+SOLUTION:
+function uniqueInOrder(iterable){
+  const uniqueChars = []
+  
+  for (const char of iterable){
+    if (uniqueChars.length === 0 || char !== uniqueChars.at(-1)){
+      uniqueChars.push(char)
+    }
+  }
+  return uniqueChars
+  }
+
+
+ALTERNATIVE/S:
+- Use 2 pointers and compare left and right
+
+----------------------------------------------------------------------
 DATE: 11/23/26
 
 CHALLENGE NAME: Detect Pangram
